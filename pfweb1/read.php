@@ -2,20 +2,13 @@
 include "conexion.php";
 mysqli_set_charset($conexion, 'utf8');
 
-// Inicializar la variable $id_usuario
-$id_usuario = "";
-
-// Verificar si se ha enviado el formulario
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Obtener el ID del usuario del formulario
-    $id_usuario = $_POST['id_usuario'];
-
-    // Eliminar el usuario de la base de datos
-    $sql_delete = "DELETE FROM user WHERE id = '$id_usuario'";
-    if ($conexion->query($sql_delete) === TRUE) {
-        echo "<h2>Usuario eliminado correctamente.</h2>";
+// Función para actualizar el nombre de usuario
+function actualizarNombreUsuario($conexion, $id, $nuevoNombreUsuario) {
+    $sql = "UPDATE user SET nombre_usuario = '$nuevoNombreUsuario' WHERE id = $id";
+    if ($conexion->query($sql) === TRUE) {
+        return true;
     } else {
-        echo "Error al eliminar el usuario: " . $conexion->error;
+        return false;
     }
 }
 
@@ -80,6 +73,24 @@ $resultado = $conexion->query($sql);
         .btn-delete:hover {
             background-color: #ff6659;
         }
+        /* Estilos para el botón de actualizar */
+        .btn-update {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .btn-update:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
@@ -89,15 +100,9 @@ $resultado = $conexion->query($sql);
         <a href="#">Leer Usuarios</a>
     </div>
 
-    <!-- Formulario para eliminar usuario por ID -->
-    <h1>Eliminar Usuario</h1>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <label for="id_usuario">ID del Usuario a Eliminar:</label>
-        <input type="text" name="id_usuario" required>
-        <button type="submit">Eliminar</button>
-    </form>
+    <!-- Mensaje de conexión con éxito oculto -->
+    <p style="display: none;">Conexión con éxito</p>
     
-    <!-- Tabla de usuarios -->
     <h1>Usuarios Registrados</h1>
     <table>
         <thead>
@@ -118,12 +123,22 @@ $resultado = $conexion->query($sql);
                 echo "<td>" . $fila['nombre_usuario'] . "</td>";
                 echo "<td>" . $fila['correo'] . "</td>";
                 echo "<td>" . $fila['descripcion'] . "</td>";
-                echo "<td><form action='read.php' method='post'><input type='hidden' name='id_usuario' value='" . $fila['id'] . "'><button class='btn-delete' type='submit'>Eliminar</button></form></td>"; // Botón para eliminar
+                echo "<td><form action='delete.php' method='post'><input type='hidden' name='id' value='" . $fila['id'] . "'><button class='btn-delete' type='submit'>Eliminar</button></form></td>"; // Botón para eliminar
                 echo "</tr>";
             }
             ?>
         </tbody>
     </table>
+    
+    <!-- Formulario para actualizar nombre de usuario -->
+    <h2>Actualizar Nombre de Usuario</h2>
+    <form action="update.php" method="post">
+        <label for="id">ID del Usuario:</label>
+        <input type="text" id="id" name="id" required>
+        <label for="nuevoNombreUsuario">Nuevo Nombre de Usuario:</label>
+        <input type="text" id="nuevoNombreUsuario" name="nuevoNombreUsuario" required>
+        <button class="btn-update" type="submit">Actualizar</button>
+    </form>
     
     <!-- Enlace para ir a index1.html -->
     <p><a href="index1.html">Volver a la página principal</a></p>
