@@ -2,6 +2,23 @@
 include "conexion.php";
 mysqli_set_charset($conexion, 'utf8');
 
+// Inicializar la variable $id_usuario
+$id_usuario = "";
+
+// Verificar si se ha enviado el formulario
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Obtener el ID del usuario del formulario
+    $id_usuario = $_POST['id_usuario'];
+
+    // Eliminar el usuario de la base de datos
+    $sql_delete = "DELETE FROM user WHERE id = '$id_usuario'";
+    if ($conexion->query($sql_delete) === TRUE) {
+        echo "<h2>Usuario eliminado correctamente.</h2>";
+    } else {
+        echo "Error al eliminar el usuario: " . $conexion->error;
+    }
+}
+
 // Consultar los datos de la tabla user
 $sql = "SELECT id, nombre_usuario, correo, descripcion FROM user";
 $resultado = $conexion->query($sql);
@@ -72,9 +89,15 @@ $resultado = $conexion->query($sql);
         <a href="#">Leer Usuarios</a>
     </div>
 
-    <!-- Mensaje de conexión con éxito oculto -->
-    <p style="display: none;">Conexión con éxito</p>
+    <!-- Formulario para eliminar usuario por ID -->
+    <h1>Eliminar Usuario</h1>
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+        <label for="id_usuario">ID del Usuario a Eliminar:</label>
+        <input type="text" name="id_usuario" required>
+        <button type="submit">Eliminar</button>
+    </form>
     
+    <!-- Tabla de usuarios -->
     <h1>Usuarios Registrados</h1>
     <table>
         <thead>
@@ -95,7 +118,7 @@ $resultado = $conexion->query($sql);
                 echo "<td>" . $fila['nombre_usuario'] . "</td>";
                 echo "<td>" . $fila['correo'] . "</td>";
                 echo "<td>" . $fila['descripcion'] . "</td>";
-                echo "<td><form action='delete.php' method='post'><input type='hidden' name='id' value='" . $fila['id'] . "'><button class='btn-delete' type='submit'>Eliminar</button></form></td>"; // Botón para eliminar
+                echo "<td><form action='read.php' method='post'><input type='hidden' name='id_usuario' value='" . $fila['id'] . "'><button class='btn-delete' type='submit'>Eliminar</button></form></td>"; // Botón para eliminar
                 echo "</tr>";
             }
             ?>
