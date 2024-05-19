@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Usuario</title>
+    <link rel="stylesheet" href="estilos.css"> <!-- Asegúrate de tener estilos.css en tu proyecto -->
+</head>
+<body>
+    <div>
+        <h1 class="cent">Eliminar Usuario</h1>
+    </div>
+
+    <div>
+        <p class="cent">
+            <a href='index.html' class="cent">Página Principal</a>
+        </p>
+    </div>
+
+    <div>
+        <form action="delete.php" method="post">
+            <hr>
+            <div class="form-group">
+                <label for="id_usuario">ID del Usuario:</label>
+                <input type="text" name="id_usuario" required maxlength="100" placeholder="Ingresa el ID del Usuario a Eliminar">
+                <br><br>
+            </div>
+
+            <div>
+                <button type="submit" name="submit">Eliminar Usuario</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
