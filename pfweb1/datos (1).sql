@@ -8,7 +8,7 @@ USE `DBweb3`;
 
 -- Crear un tabla
 
-CREATE TABLE `persona`(
+CREATE TABLE `user`( id int not null auto_increment primary key,
 `nombre_usuario` text not null,
 `contrasena` text not null,
 `correo` text,

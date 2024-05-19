@@ -11,10 +11,25 @@
     
 
 <div >
-    <h1 class="cent">Prospectos</h1>
+    <h1 class="cent">Crear un usuario</h1>
 </div>
 
-<
+
+
+<div>
+
+
+<p class="cent">
+    <a href='login.html' class="cent">Inicio de sesion</a>
+</p>
+
+
+<p class="cent">
+    <a href='index1.html' class="cent">Pagina principal</a>
+</p>
+</div>
+
+
 
 
 <title>Formulario</title>
@@ -73,35 +88,49 @@
         <form action="./enviar_registro.php" method="post">
             <hr>
             <div class="form-group">
-                <label for="nombre_usuario">Ingresa nombre completo:</label>
+                <label for="nombre_usuario">Ingresa un nombre de usuario:</label>
                 <input type="text" name="nombre_usuario" required maxlength="100" placeholder="Ingresa tu Nombre">
                 <br><br>
             </div>
 
             <div class="form-group">
-                <label for="correo">Ingresa correo:</label>
+                <label for="correo">Ingresa un correo:</label>
                 <input type="text" name="correo" required maxlength="100" placeholder="Ingresa tu Correo">
                 <br><br>
             </div>
 
             <div class="form-group">
-                <label for="contrasena">Ingresa contraseña:</label>
+                <label for="contrasena">Crea una contraseña:</label>
                 <input type="password" name="contrasena" required maxlength="100" placeholder="Ingresa tu contraseña">
                 <br><br>
             </div>
 
             <div class="form-group">
-                <label for="descripcion">Ingresa Descripcion:</label>
-                <input type="text" name="descripcion" required maxlength="100" placeholder="Ingresa una descripcion">
+                <label for="descripcion">Ingresa tu nombre:</label>
+                <input type="text" name="descripcion" required maxlength="100" placeholder="Ingresa tu nombre ">
                 <br><br>
             </div>
 
-            <button type="submit" name="submit">Enviar registro</button>
-            <button type="button1" onclick="borrarRegistro()">Borrar registro</button>
+            <div>
+                <button type="submit" name="submit">Crear</button>
+            </div>
+            
+            <div>
+                <button type="button1" onclick="borrarRegistro()">Borrar campos</button>
+            </div>
+            
         </form>
 </body>
 </html>
 
+<footer>
+    <h1>
+
+    </h1>
+</footer>
+
+
 <p class="cent">
-    <a href='index.php' class="cent">Nuevo registro</a>
+    <a href='index.php' class="cent">Nuevo Usuario</a>
 </p>
+

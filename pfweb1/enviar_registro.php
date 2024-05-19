@@ -2,7 +2,7 @@
 include "./conexion.php";
 mysqli_set_charset($conexion,'utf8');
 
-$buscarusuario="SELECT * FROM  persona WHERE nombre_usuario ='$_POST[nombre_usuario]'";
+$buscarusuario="SELECT * FROM user WHERE nombre_usuario ='$_POST[nombre_usuario]'";
 
 $resultado = $conexion -> query($buscarusuario);
 $count =mysqli_num_rows($resultado);
@@ -13,9 +13,10 @@ if($count==1){
 
 }else{
 
-    mysqli_query($conexion,"INSERT INTO persona (
+    mysqli_query($conexion,"INSERT INTO user (id,
         nombre_usuario, contrasena, correo, descripcion)
         VALUES(
+            '$_POST[id]',
             '$_POST[nombre_usuario]',
             '$_POST[contrasena]',
             '$_POST[correo]',
