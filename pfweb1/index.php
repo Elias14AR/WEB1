@@ -7,8 +7,10 @@
     <link rel="stylesheet" href="asp.css">
     <title>Document</title>
 </head>
-<body>
-    
+<body class="bc">
+
+
+
 
 <div >
     <h1 class="cent">Crear un usuario</h1>

@@ -22,6 +22,8 @@ $resultado = $conexion->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="asp.css">
     <title>Mostrar Usuarios</title>
     <style>
         table {
@@ -93,7 +95,7 @@ $resultado = $conexion->query($sql);
         }
     </style>
 </head>
-<body>
+<body class="bc">
     <!-- Barra de navegación -->
     <div class="navbar">
         <a href="index1.html">Inicio</a>
